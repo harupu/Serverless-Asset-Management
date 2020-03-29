@@ -11,13 +11,15 @@ mkdir c:\Progra~1\aeyesec\ 2>$null
 
  (Get-Content .\malware_monitor.ps1) | %{ $_ -replace "{{ webhook_url }}","${webhook_url}" } | Set-Content .\tmp_malware_monitor.ps1
 Move-Item tmp_malware_monitor.ps1 c:\Progra~1\aeyesec\malware_monitor.ps1 -force
-curl http://nssm.cc/release/nssm-2.24.zip -O nssm-2.24.zip
-rm -r .\nssm-2.24
-Expand-Archive nssm-2.24.zip
-if ([System.Environment]::Is64BitProcess) {
-  cd nssm-2.24\nssm-2.24\win64
-} else {
-  cd nssm-2.24\nssm-2.24\win32
+if (!(Test-Path c:\Progra~1\nssm-2.24)){
+  curl http://nssm.cc/release/nssm-2.24.zip -O nssm-2.24.zip
+  Expand-Archive nssm-2.24.zip
+  Move-Item nssm-2.24\nssm-2.24 c:\Progra~1\nssm-2.24 -force
+  if ([System.Environment]::Is64BitProcess) {
+    cd c:\Progra~1\nssm-2.24\win64
+  } else {
+    cd c:\Progra~1\nssm-2.24\win32
+  }
 }
 .\nssm stop WindowsDefenderSlackAlert 2>$null
 .\nssm remove WindowsDefenderSlackAlert confirm 2>$null
