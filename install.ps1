@@ -15,11 +15,11 @@ if (!(Test-Path c:\Progra~1\nssm-2.24)){
   curl http://nssm.cc/release/nssm-2.24.zip -O nssm-2.24.zip
   Expand-Archive nssm-2.24.zip
   Move-Item nssm-2.24\nssm-2.24 c:\Progra~1\nssm-2.24 -force
-  if ([System.Environment]::Is64BitProcess) {
-    cd c:\Progra~1\nssm-2.24\win64
-  } else {
-    cd c:\Progra~1\nssm-2.24\win32
-  }
+}
+if ([System.Environment]::Is64BitProcess) {
+  cd c:\Progra~1\nssm-2.24\win64
+} else {
+  cd c:\Progra~1\nssm-2.24\win32
 }
 .\nssm stop WindowsDefenderSlackAlert 2>$null
 .\nssm remove WindowsDefenderSlackAlert confirm 2>$null
