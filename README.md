@@ -1,5 +1,5 @@
-# WindowDefender-Slack-Alert
-WindowDefender Slack Alert
+# WindowsDefender-Slack-Alert
+WindowsDefender Slack Alert
 
 # How to install
 
