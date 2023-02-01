@@ -34,3 +34,5 @@ Make slack channel for malware alert detection and make the webhook url.
 <img src="https://user-images.githubusercontent.com/7601382/77862237-0e8b0580-7255-11ea-9572-fb5d3e6deaad.png" width="320">
 6. Download eicar.com from https://www.eicar.org/ and confirm alert on slack. Alert will be sent within 60s.<br>
 <img src="https://user-images.githubusercontent.com/7601382/77862289-73466000-7255-11ea-9413-964e1cccc8b1.png" width="320">
+7. And you can collect asset information like below<br>
+<img width="500" alt="image" src="https://user-images.githubusercontent.com/7601382/215935150-84613d1b-872e-4df5-a307-22e7d4143811.png">
