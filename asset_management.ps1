@@ -51,6 +51,16 @@ function PostAssetInfo(){
     Update-MpSignature -UpdateSource MicrosoftUpdateServer
     $mp_status = (Get-MpComputerStatus)
   }
+
+  $status_check_start_date = (Get-Date)
+  while (!$mp_status.RealTimeProtectionEnabled) {
+    if ((Get-Date).AddMinutes(-10) -gt $status_check_start_date) {
+      break
+    }
+    $mp_status = (Get-MpComputerStatus)
+    Start-Sleep -s 30
+  }
+
   $hostname = (hostname)
   $username = ((GET-WmiObject Win32_ComputerSystem).UserName)
   try {
