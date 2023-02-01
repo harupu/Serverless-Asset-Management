@@ -1,4 +1,4 @@
-var header = ['Host Name', 'User Name', 'Latest KB', 'Realtime Scan', 'Signature Ver.', 'Signature Date', 'OS Version', 'Updated At'];
+var header = ['SerialNo', 'Host Name', 'User Name', 'Latest KB', 'Realtime Scan', 'Signature Ver.', 'Signature Date', 'OS Version', 'Updated At'];
 
 function doGet(e) {
   Logger.log(e);
@@ -11,6 +11,7 @@ function doPost(e) {
   var range = spreadSheet.getDataRange();
   var values = range.getValues();
   var newValue = [
+    e.parameter.serialNumber,
     e.parameter.hostname,
     (e.parameter.username || '').replace(/^.*\\/,""),
     e.parameter.latestKB || 'N/A',
@@ -24,7 +25,7 @@ function doPost(e) {
   values.unshift(header);
   var existsFlg = false;
   for (var i=0; i<values.length; ++i) {
-    if (values[i][0] === e.parameter.hostname) {
+    if (values[i][0] === e.parameter.serialNumber) {
       values[i] = newValue;
       existsFlg = true;
       break;

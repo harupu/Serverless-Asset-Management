@@ -72,7 +72,12 @@ function PostAssetInfo(){
   $signatureVersion = $mp_status.AntivirusSignatureVersion;
   $signatureDate = $mp_status.AntivirusSignatureLastUpdated;
   $osVersion = (cmd /c ver) -join ""
+  $serialNumber = (Get-WmiObject Win32_BIOS).SerialNumber;
+  if([string]::IsNullOrEmpty($serialNumber)) {
+    $serialNumber = (Get-WmiObject Win32_OperatingSystem).SerialNumber;
+  }
   $data = @{
+    serialNumber = "${serialNumber}";
     hostname = "${hostname}";
     username = "${username}";
     latestKB = "${latestKB}";
