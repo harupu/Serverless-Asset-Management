@@ -73,7 +73,7 @@ function PostAssetInfo(){
   $signatureDate = $mp_status.AntivirusSignatureLastUpdated;
   $osVersion = (cmd /c ver) -join ""
   $serialNumber = (Get-WmiObject Win32_BIOS).SerialNumber;
-  if([string]::IsNullOrEmpty($serialNumber)) {
+  if([string]::IsNullOrEmpty($serialNumber) -or $serialNumber -eq "To Be Filled By O.E.M.") {
     $serialNumber = (Get-WmiObject Win32_OperatingSystem).SerialNumber;
   }
   $data = @{
