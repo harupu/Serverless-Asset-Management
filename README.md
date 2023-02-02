@@ -1,5 +1,5 @@
-# Windows-Asset-Management
-This enables you to manage Windows Defender and Windows Update on PCs of your organization.
+# Serverless-Asset-Management
+This enables you to manage your anti-virus (Windows Defender, ClamAV), Windows Update on PCs and Macs of your organization.
 
 # How to setup
 
