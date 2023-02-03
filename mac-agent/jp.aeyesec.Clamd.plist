@@ -11,7 +11,7 @@
 	<key>RunAtLoad</key>
 	<true/>
 	<key>KeepAlive</key>
-  <true/>
+	<true/>
 	<key>StandardErrorPath</key>
 	<string>/var/log/clamav/clamd.log</string>
 	<key>StandardOutPath</key>

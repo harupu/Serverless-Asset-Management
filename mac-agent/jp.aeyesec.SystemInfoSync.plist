@@ -11,8 +11,8 @@
 	</array>
 	<key>RunAtLoad</key>
 	<false/>
-	<key>StartInterval</key>
-	<integer>3600</integer>
+	<key>KeepAlive</key>
+	<true/>
 	<key>StandardErrorPath</key>
 	<string>/var/log/system_info_syncx.log</string>
 	<key>StandardOutPath</key>

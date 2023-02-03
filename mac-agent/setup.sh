@@ -58,7 +58,3 @@ sudo launchctl load /Library/LaunchDaemons/jp.aeyesec.ClamdUpdate.plist
 sudo install -m 644 ./jp.aeyesec.ClamdScheduledScan.plist /Library/LaunchDaemons
 sudo launchctl unload /Library/LaunchDaemons/jp.aeyesec.ClamdScheduledScan.plist 2> /dev/null
 sudo launchctl load /Library/LaunchDaemons/jp.aeyesec.ClamdScheduledScan.plist
-
-echo Wait 30 seconds until clamd started... 
-sleep 30
-sudo /usr/local/bin/system_info_syncx
