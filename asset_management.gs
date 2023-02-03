@@ -1,4 +1,4 @@
-var header = ['SerialNo', 'Host Name', 'User Name', 'Latest KB', 'Realtime Scan', 'Signature Ver.', 'Signature Date', 'OS Version', 'Updated At'];
+var header = ['SerialNo', 'Host Name', 'User Name', 'Realtime Scan', 'Signature Ver.', 'Signature Date', 'OS Version', 'Updated At'];
 
 function doGet(e) {
   Logger.log(e);
@@ -8,17 +8,16 @@ function doGet(e) {
 function doPost(e) {
   var spreadSheet = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = spreadSheet.getSheetByName('summary');
-  var range = spreadSheet.getDataRange();
+  var range = sheet.getRange(1, 1, 9999, header.length);
   var values = range.getValues();
   var newValue = [
     e.parameter.serialNumber,
     e.parameter.hostname,
     (e.parameter.username || '').replace(/^.*\\/,""),
-    e.parameter.latestKB || 'N/A',
     e.parameter.realtimeEnabled,
     e.parameter.signatureVersion,
     e.parameter.signatureDate,
-    e.parameter.osVersion,
+    (e.parameter.osVersion || '').replace(/^Microsoft Windows \[Version (.+)\]$/, "$1"),
     new Date()
   ];
   values.shift();
