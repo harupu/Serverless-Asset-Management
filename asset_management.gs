@@ -17,11 +17,14 @@ function doPost(e) {
     e.parameter.realtimeEnabled,
     e.parameter.signatureVersion,
     e.parameter.signatureDate,
-    (e.parameter.osVersion || '').replace(/^Microsoft Windows \[Version (.+)\]$/, "$1"),
+    (e.parameter.osVersion || '')
+      .replace(/^Microsoft Windows \[Version (.+)\]$/, "$1")
+      .replace(/\t/, ""),
     new Date()
   ];
   values.shift();
   values.unshift(header);
+  values = values.filter(v=>{return v[0]&&v[1]&&v[2]});
   var existsFlg = false;
   for (var i=0; i<values.length; ++i) {
     if (values[i][0] === e.parameter.serialNumber) {
