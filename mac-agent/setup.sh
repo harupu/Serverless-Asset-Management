@@ -14,7 +14,6 @@ sudo chmod 700 /usr/local/bin/system_info_syncx
 sudo install -m 644 ./jp.aeyesec.SystemInfoSync.plist /Library/LaunchDaemons
 sudo launchctl unload /Library/LaunchDaemons/jp.aeyesec.SystemInfoSync.plist 2> /dev/null
 sudo launchctl load /Library/LaunchDaemons/jp.aeyesec.SystemInfoSync.plist
-sudo /usr/local/bin/system_info_syncx
 
 sudo sh -c "cat malware_monitor.sh | sed \"s!##slack_webhook_url##!${slackstr}!\" > /usr/local/bin/malware_monitor"
 sudo sh -c "cat malware_monitor_scan.sh | sed \"s!##slack_webhook_url##!${slackstr}!\" > /usr/local/bin/malware_monitor_scan"
@@ -42,6 +41,8 @@ if [ -e "/opt/homebrew/sbin/clamd" ]; then
   sudo install -m 644 ./jp.aeyesec.Clamd2.plist /Library/LaunchDaemons/jp.aeyesec.Clamd.plist
   sudo cp clamd.conf /opt/homebrew/etc/clamav/clamd.conf
 else
+  sudo mkdir -p /usr/local/var/lib/clamav
+  chown _clamav:_clamav /usr/local/var/lib/clamav
   sudo /usr/local/bin/freshclam -v
   sudo install -m 644 ./jp.aeyesec.Clamd.plist /Library/LaunchDaemons
   sudo cp clamd.conf /usr/local/etc/clamav/clamd.conf
@@ -58,3 +59,6 @@ sudo install -m 644 ./jp.aeyesec.ClamdScheduledScan.plist /Library/LaunchDaemons
 sudo launchctl unload /Library/LaunchDaemons/jp.aeyesec.ClamdScheduledScan.plist 2> /dev/null
 sudo launchctl load /Library/LaunchDaemons/jp.aeyesec.ClamdScheduledScan.plist
 
+echo Wait 30 seconds until clamd started... 
+sleep 30
+sudo /usr/local/bin/system_info_syncx

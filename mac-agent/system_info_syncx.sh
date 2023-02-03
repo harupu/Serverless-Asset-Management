@@ -20,7 +20,11 @@ SIGVAR=$($CLAMDSCAN --version | awk -F "[ /]" '{print $3}')
 if [ -e "/opt/homebrew/bin/clamdscan" ]; then
     SIGDATE=$(date -r $(stat -f "%m" /opt/homebrew/var/lib/clamav/daily.cld) "+%Y/%m/%d %H:%M")
 else
-    SIGDATE=$(date -r $(stat -f "%m" /var/lib/clamav/daily.cld) "+%Y/%m/%d %H:%M")
+    if [ -e "/usr/local/var/lib/clamav/daily.cvd" ]; then
+        SIGDATE=$(date -r $(stat -f "%m" /usr/local/var/lib/clamav/daily.cvd) "+%Y/%m/%d %H:%M")
+    else
+        SIGDATE=$(date -r $(stat -f "%m" /usr/local/var/lib/clamav/daily.cld) "+%Y/%m/%d %H:%M")
+    fi
 fi
 
 curl -s -S -X POST $SPREADSHEET_URL -H "Content-Type: application/x-www-form-urlencoded" -d "serialNumber=$SERIAL&hostname=$HOSTNAME&username=$USERNAME&latestKB=&realtimeEnabled=$ANTI_VIRUS&signatureVersion=$SIGVAR&signatureDate=$SIGDATE&osVersion=${OSVER}_$BUILDVER" > /dev/null
