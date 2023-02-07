@@ -76,6 +76,8 @@ function PostAssetInfo(){
   if([string]::IsNullOrEmpty($serialNumber) -or $serialNumber -eq "To Be Filled By O.E.M.") {
     $serialNumber = (Get-WmiObject Win32_OperatingSystem).SerialNumber;
   }
+  $diskEncryption = (Get-WMIObject -Namespace "root/CIMV2/Security/MicrosoftVolumeEncryption" -Class Win32_EncryptableVolume).GetConversionStatus().ConversionStatus
+
   $data = @{
     serialNumber = "${serialNumber}";
     hostname = "${hostname}";
@@ -85,6 +87,7 @@ function PostAssetInfo(){
     signatureVersion = "${signatureVersion}";
     signatureDate = "${signatureDate}";
     osVersion = "${osVersion}";
+    diskEncryption = "${$diskEncryption}";
   }
   Invoke-RestMethod -Uri $spread_sheet_api -Method Post -Body $data
 }

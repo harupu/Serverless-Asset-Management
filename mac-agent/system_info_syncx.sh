@@ -29,8 +29,9 @@ do
             SIGDATE=$(date -r $(stat -f "%m" /usr/local/var/lib/clamav/daily.cld) "+%Y/%m/%d %H:%M")
         fi
     fi
+    DISK_ENCRYPTION=$(fdesetup status | head -n 1)
 
-    curl -s -S -X POST $SPREADSHEET_URL -H "Content-Type: application/x-www-form-urlencoded" -d "serialNumber=$SERIAL&hostname=$HOSTNAME&username=$USERNAME&latestKB=&realtimeEnabled=$ANTI_VIRUS&signatureVersion=$SIGVAR&signatureDate=$SIGDATE&osVersion=${OSVER}_$BUILDVER" > /dev/null
+    curl -s -S -X POST $SPREADSHEET_URL -H "Content-Type: application/x-www-form-urlencoded" -d "serialNumber=$SERIAL&hostname=$HOSTNAME&username=$USERNAME&latestKB=&realtimeEnabled=$ANTI_VIRUS&signatureVersion=$SIGVAR&signatureDate=$SIGDATE&osVersion=${OSVER}_$BUILDVER&diskEncryption=${DISK_ENCRYPTION}" > /dev/null
 
     sleep 3540
 done
