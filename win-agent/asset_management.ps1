@@ -87,7 +87,7 @@ function PostAssetInfo(){
     signatureVersion = "${signatureVersion}";
     signatureDate = "${signatureDate}";
     osVersion = "${osVersion}";
-    diskEncryption = "${$diskEncryption}";
+    diskEncryption = "${diskEncryption}";
   }
   Invoke-RestMethod -Uri $spread_sheet_api -Method Post -Body $data
 }
