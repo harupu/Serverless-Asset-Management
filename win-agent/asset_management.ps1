@@ -95,11 +95,16 @@ function PostAssetInfo(){
 
 $last_log_date = get-date
 $last_detection_id = ""
-$last_update_date = 0
+PostAssetInfo
+$last_update_date = get-date
 while (1) {
   if ((get-date).AddHours(-1) -gt $last_update_date) {
     PostAssetInfo
     $last_update_date = get-date
+    # break when autoupdate mode
+    if ($myInvocation.MyCommand.name -eq "asset_management_script.ps1") {
+      break
+    }
   }
 
   $events = (get-winevent -LogName "Microsoft-Windows-Windows Defender/Operational" | where-object {$_.Id -ge 1006 -and $_.Id -le 1120 -and $_.TimeCreated -gt $last_log_date} )
