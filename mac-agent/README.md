@@ -29,7 +29,7 @@ Please input slack webook url:https://hooks.slack.com/services/xxxx (Your webook
 
 4. Allow FullDiskAccess to malware_monitor_wrapper.
 
-To find /usr/local/bin/ on dialog, type Command+Shift+G.
+To find /usr/local/bin/ on dialog, click plus icon or type Command+Shift+G.
 
 <img src="https://user-images.githubusercontent.com/7601382/78830555-1c921080-7a23-11ea-85c6-fabcc0e6c21c.png" width=400>
 
